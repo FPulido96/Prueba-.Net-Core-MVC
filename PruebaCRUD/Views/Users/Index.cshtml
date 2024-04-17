@@ -1,0 +1,114 @@
+﻿@model IEnumerable<PruebaCRUD.Models.User>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Usuarios</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">
+        <i class="fas fa-plus"></i> 
+    </a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Nombre
+            </th>
+            <th>
+                Apellido
+            </th>
+            <th>
+                Documento
+            </th>
+            <th>
+                Número
+            </th>
+            <th>
+                Fecha de Nacimiento
+            </th>
+            <th>
+                Telefono
+            </th>
+            <th>
+                Dirección
+            </th>
+            <th>
+                Ciudad
+            </th>
+            <th>
+                Acciones
+            </th>
+        </tr>
+    </thead>
+    <tbody id="tableUsers">
+    @foreach (var item in Model) {
+        
+        var currentYear = DateTime.Now.Year;
+        var birthYear = item.BirthDate.Year;
+        var age = currentYear - birthYear;
+
+        string rowClass = "";
+
+        if (age < 18){
+            rowClass = "table-primary"; 
+        }
+        else if (age >= 18 && age <= 50){
+            rowClass = "table-warning";
+        }
+        else{
+            rowClass = "table-danger"; // Rojo
+        }
+        <tr class="@rowClass">
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            @{
+                switch (item.DocumentType)
+                {
+                    case "CC":
+                        <td>Cédula de Ciudadanía</td>
+                        break;
+                    case "TI":
+                        <td>Tarjeta de Identidad</td>
+                        break;
+                    case "CE":
+                        <td>Cédula de Extranjería</td>
+                         break;
+                }
+            }
+            <td>
+                @Html.DisplayFor(modelItem => item.DocumentNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BirthDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Telephone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.City)
+            </td>
+            <td>
+                <a asp-action="Edit" class="btn btn-warning" asp-route-id="@item.Id">
+                    <i class="fa-solid fa-pencil"></i>
+                </a> 
+                <a asp-action="Details" class="btn btn-success" asp-route-id="@item.Id">
+                    <i class="fa-solid fa-circle-info"></i>
+                </a> 
+                <a asp-action="Delete" class="btn btn-danger" asp-route-id="@item.Id">
+                    <i class="fa-solid fa-trash"></i>
+                </a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

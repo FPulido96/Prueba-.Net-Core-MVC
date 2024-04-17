@@ -1,0 +1,73 @@
+﻿@model PruebaCRUD.Models.User
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Eliminar Usuario</h1>
+
+<h3>¿Estás seguro de eliminar este usario?</h3>
+<div>
+    <h4>User</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            Nombre:
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            Apellido:
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+        <dt class = "col-sm-2">
+            Documento:
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DocumentType)
+        </dd>
+        <dt class = "col-sm-2">
+           Número:
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DocumentNumber)
+        </dd>
+        <dt class = "col-sm-2">
+            Fecha de Nacimiento
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.BirthDate)
+        </dd>
+        <dt class = "col-sm-2">
+            Telefono
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Telephone)
+        </dd>
+        <dt class = "col-sm-2">
+            Dirección
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+        <dt class = "col-sm-2">
+            Ciudad
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.City)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <button type="submit" class="btn btn-success">
+            <i class="fa-solid fa-check"></i>
+        </button> | 
+        <a asp-action="Index" class="btn btn-danger">
+            <i class="fa-solid fa-x"></i>
+        </a>
+    </form>
+</div>
